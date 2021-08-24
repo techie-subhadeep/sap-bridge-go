@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT}:80"
+    extra_hosts:
+      - "dclerpse.wbsedcl.in:10.251.65.108"
+    environment:
+      - SAP_ASHOST=${SAP_ASHOST}
+      - SAP_SYSNR=${SAP_SYSNR}
+      - SAP_CLIENT=${SAP_CLIENT}
+      - SAP_USER=${SAP_USER}
+      - SAP_PASSWD=${SAP_PASSWD}
