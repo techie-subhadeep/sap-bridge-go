@@ -5,6 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sap/gorfc/gorfc"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "wbsedcl.in/sap-bridge/docs"
 )
 
 func GetRfcConnectionParam() gorfc.ConnectionParameters {
@@ -19,6 +22,11 @@ func GetRfcConnectionParam() gorfc.ConnectionParameters {
 
 func main() {
 	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(301, "/swagger/index.html")
+	})
+
 	r.GET("/ping", func(c *gin.Context) {
 		sapConn, _ := gorfc.ConnectionFromParams(GetRfcConnectionParam())
 		if sapConn != nil {
@@ -29,5 +37,7 @@ func main() {
 			"message": connAttr,
 		})
 	})
+	url := ginSwagger.URL("/swagger/doc.json")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	r.Run("0.0.0.0:80") // listen and serve on 0.0.0.0:80
 }
