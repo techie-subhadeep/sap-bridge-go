@@ -17,7 +17,11 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Developer",
+            "url": "https://github.com/subhadeepdas91"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -36,12 +40,12 @@ type swaggerInfo struct {
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
-	Version:     "",
+	Version:     "1.0",
 	Host:        "",
 	BasePath:    "",
 	Schemes:     []string{},
-	Title:       "",
-	Description: "",
+	Title:       "SAP RFC Bridge",
+	Description: "This project provide REST API to intract with SAP RFC",
 }
 
 type s struct{}

@@ -20,6 +20,14 @@ func GetRfcConnectionParam() gorfc.ConnectionParameters {
 	}
 }
 
+// @title SAP RFC Bridge
+// @version 1.0
+// @description This project provide REST API to intract with SAP RFC
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name Developer
+// @contact.url https://github.com/subhadeepdas91
+
 func main() {
 	r := gin.Default()
 
