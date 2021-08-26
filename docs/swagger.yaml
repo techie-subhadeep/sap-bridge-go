@@ -6,5 +6,16 @@ info:
   termsOfService: http://swagger.io/terms/
   title: SAP RFC Bridge
   version: "1.0"
-paths: {}
+paths:
+  /ping:
+    get:
+      description: Display Connection Details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Dispaly Connection Details
 swagger: "2.0"

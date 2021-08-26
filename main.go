@@ -1,24 +1,13 @@
 package main
 
 import (
-	"os"
+	"sap-bridge/api"
+	_ "sap-bridge/docs"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sap/gorfc/gorfc"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "wbsedcl.in/sap-bridge/docs"
 )
-
-func GetRfcConnectionParam() gorfc.ConnectionParameters {
-	return gorfc.ConnectionParameters{
-		"Client": os.Getenv("SAP_CLIENT"),
-		"User":   os.Getenv("SAP_USER"),
-		"Passwd": os.Getenv("SAP_PASSWD"),
-		"Ashost": os.Getenv("SAP_ASHOST"),
-		"Sysnr":  os.Getenv("SAP_SYSNR"),
-	}
-}
 
 // @title SAP RFC Bridge
 // @version 1.0
@@ -27,7 +16,6 @@ func GetRfcConnectionParam() gorfc.ConnectionParameters {
 
 // @contact.name Developer
 // @contact.url https://github.com/subhadeepdas91
-
 func main() {
 	r := gin.Default()
 
@@ -35,16 +23,7 @@ func main() {
 		c.Redirect(301, "/swagger/index.html")
 	})
 
-	r.GET("/ping", func(c *gin.Context) {
-		sapConn, _ := gorfc.ConnectionFromParams(GetRfcConnectionParam())
-		if sapConn != nil {
-			defer sapConn.Close()
-		}
-		connAttr, _ := sapConn.GetConnectionAttributes()
-		c.JSON(200, gin.H{
-			"message": connAttr,
-		})
-	})
+	r.GET("/ping", api.Ping)
 	url := ginSwagger.URL("/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	r.Run("0.0.0.0:80") // listen and serve on 0.0.0.0:80

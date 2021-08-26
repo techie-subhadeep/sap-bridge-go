@@ -1,4 +1,4 @@
-module wbsedcl.in/sap-bridge
+module sap-bridge
 
 go 1.17
 
