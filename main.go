@@ -24,6 +24,8 @@ func main() {
 	})
 
 	r.GET("/ping", api.Ping)
+	r.POST("/call/:rfc", api.Call)
+	r.POST("/read-table/:table", api.ReadTable)
 	url := ginSwagger.URL("/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	r.Run("0.0.0.0:80") // listen and serve on 0.0.0.0:80

@@ -27,6 +27,41 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/call/{rfc}": {
+            "post": {
+                "description": "Display Connection Details",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Dispaly Connection Details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "RFC Name",
+                        "name": "rfc",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Request Body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.CallRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/ping": {
             "get": {
                 "description": "Display Connection Details",
@@ -40,6 +75,69 @@ var doc = `{
                         "schema": {
                             "type": "string"
                         }
+                    }
+                }
+            }
+        },
+        "/read-table/{table}": {
+            "post": {
+                "description": "Read ERP Table Data",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Read Table",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Table Name",
+                        "name": "table",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Request Body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ReadTableRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.CallRequestBody": {
+            "type": "object"
+        },
+        "api.ReadTableRequestBody": {
+            "type": "object",
+            "properties": {
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "maxRows": {
+                    "type": "integer"
+                },
+                "skipRows": {
+                    "type": "integer"
+                },
+                "where": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }

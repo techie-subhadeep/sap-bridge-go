@@ -1,3 +1,21 @@
+definitions:
+  api.CallRequestBody:
+    type: object
+  api.ReadTableRequestBody:
+    properties:
+      fields:
+        items:
+          type: string
+        type: array
+      maxRows:
+        type: integer
+      skipRows:
+        type: integer
+      where:
+        items:
+          type: string
+        type: array
+    type: object
 info:
   contact:
     name: Developer
@@ -7,6 +25,29 @@ info:
   title: SAP RFC Bridge
   version: "1.0"
 paths:
+  /call/{rfc}:
+    post:
+      description: Display Connection Details
+      parameters:
+      - description: RFC Name
+        in: path
+        name: rfc
+        required: true
+        type: string
+      - description: Request Body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.CallRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Dispaly Connection Details
   /ping:
     get:
       description: Display Connection Details
@@ -18,4 +59,27 @@ paths:
           schema:
             type: string
       summary: Dispaly Connection Details
+  /read-table/{table}:
+    post:
+      description: Read ERP Table Data
+      parameters:
+      - description: Table Name
+        in: path
+        name: table
+        required: true
+        type: string
+      - description: Request Body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.ReadTableRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Read Table
 swagger: "2.0"
