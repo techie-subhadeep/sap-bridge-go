@@ -17,7 +17,6 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Developer",
             "url": "https://github.com/subhadeepdas91"

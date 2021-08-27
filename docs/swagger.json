@@ -3,7 +3,6 @@
     "info": {
         "description": "This project provide REST API to intract with SAP RFC",
         "title": "SAP RFC Bridge",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Developer",
             "url": "https://github.com/subhadeepdas91"

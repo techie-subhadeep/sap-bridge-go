@@ -21,7 +21,6 @@ info:
     name: Developer
     url: https://github.com/subhadeepdas91
   description: This project provide REST API to intract with SAP RFC
-  termsOfService: http://swagger.io/terms/
   title: SAP RFC Bridge
   version: "1.0"
 paths:
