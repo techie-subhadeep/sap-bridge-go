@@ -10,12 +10,6 @@ import (
 
 type CallRequestBody interface{}
 
-func handleError(c *gin.Context, error error) {
-	if error != nil {
-		c.JSON(422, gin.H{"status": "error", "message": error.Error()})
-	}
-}
-
 //
 // @Summary Dispaly Connection Details
 // @Description Display Connection Details
